@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="./src/style.css">
+        <title>Sats</title>
+    </head>
+    <body>
+        <!-- ₿ -->
+        <main class="flex-def w-full h-screen bg-[url(/bg.jpg)]">
+            
+            <!-- MODAL OF BITCOIN UNITS -->
+            <div class="modal fade" id="btc-list" aria-hidden="true" aria-labelledby="btc-listLabel" tabindex="-1">
+                <div id="btc-list" class="modal-dialog modal-fullscreen-sm-down">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 text-black" id="btc-listLabel">Select Unit</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <ul class="list-group list-group-flush">
+                                    <li data-bs-dismiss="modal" class="lii flex flex-row justify-start items-center gap-2 list-group-item hover:bg-gray-100">
+                                        <img src="/bitcoin.svg" alt="Not found" class="w-4 h-4 text-black"/>
+                                        BTC
+                                    </li>
+                                    <li data-bs-dismiss="modal" class="lii flex flex-row justify-start items-center gap-2 list-group-item hover:bg-gray-100">
+                                        <img src="/sats.jpg" alt="Not found" class="w-4 h-4 text-black"/>
+                                        SAT
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL OF FIAT UNITS -->
+            <div class="modal fade" id="fiat-list" aria-hidden="true" aria-labelledby="fiat-listLabel" tabindex="-1">
+                <div id="fiat-list" class="modal-dialog modal-fullscreen-sm-down">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 text-black" id="fiat-listLabel">Select Unit</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <ul class="list-group list-group-flush">
+                                    <li data-bs-dismiss="modal" class="lii flex flex-row justify-start items-center gap-2 list-group-item hover:bg-gray-100">
+                                        <img src="/gel.png" alt="Not found" class="w-4 h-4 text-black"/>
+                                        GEL
+                                    </li>
+                                    <li data-bs-dismiss="modal" class="lii flex flex-row justify-start items-center gap-2 list-group-item hover:bg-gray-100">
+                                        <img src="/usd.svg" alt="Not found" class="w-4 h-4 text-black"/>
+                                        USD
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: rgba(254, 249, 195, 0.3);" class="flex-def gap-5 w-1/2 h-1/2 border border-1 border-black rounded-xl shadow-lg p-6">
+                <h1 style="background: rgba(254, 249, 195, 0.9);"
+                    class="text-3xl font-bold p-4 rounded">Bitcoin calculator and converter</h1>
+
+                <div class="flex-inline gap-4 bg-transparent w-full">
+                    <div class="input-group w-2/3 input-group-lg rounded-xl bg-yellow-100">
+                            <button id="fiat-select-button" 
+                                class="btn input-group-text flex-inline gap-1 pt-2 pb-2" 
+                                data-bs-target="#fiat-list" 
+                                data-bs-toggle="modal"
+                            >
+                                <img src="/gel.png" alt="Not found" class="w-4 h-4 text-black"/>
+                                GEL
+                            </button>
+                        <input type="number"
+                            placeholder="0"
+                            class="form-control shadow-none bg-yellow-100" 
+                            aria-label="Sizing example input" 
+                            aria-describedby="fiat-select-button"
+                            id="fiat-input"
+                        >
+                    </div>
+                </div>
+
+                <div class="flex-inline gap-4 bg-transparent w-full">
+                    <div class="input-group w-2/3 input-group-lg rounded-xl bg-yellow-100">
+                            <button id="btc-select-button" 
+                                class="btn input-group-text flex-inline gap-1 pt-2 pb-2"
+                                data-bs-target="#btc-list"
+                                data-bs-toggle="modal"
+                            >
+                                <img src="/sats.jpg" alt="Not found" class="w-4 h-4 text-black"/>
+                                SAT
+                            </button>
+                        <input type="number" 
+                            placeholder="0"
+                            class="form-control shadow-none bg-yellow-100" 
+                            aria-label="Sizing example input" 
+                            aria-describedby="btc-select-button"
+                            id="btc-input"
+                        >
+                    </div>
+                </div>
+
+            </div>
+        </main>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>
