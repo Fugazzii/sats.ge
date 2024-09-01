@@ -1,4 +1,5 @@
 import { Rates } from "./types";
+import { btcToGel, btcToUsd, gelToBtc, gelToSat, satToGel, satToUsd, usdToBtc, usdToSat } from "./utils";
 
 const d = document;
 const w = window;
@@ -31,19 +32,6 @@ w.onload = () => {
     changeColorOfSelected();
 }
 
-const btcToSat = (btc: number) => btc * 100_000_000;
-const satToBtc = (sat: number) => sat / 100_000_000;
-
-const gelToBtc = (gel: number) => gel / data.gel.value;
-const btcToGel = (btc: number) => btc * data.gel.value;
-const gelToSat = (gel: number) => btcToSat(gelToBtc(gel));
-const satToGel = (sat: number) => btcToGel(satToBtc(sat));
-
-const usdToBtc = (usd: number) => usd / data.usd.value;
-const btcToUsd = (btc: number) => btc * data.usd.value;
-const usdToSat = (usd: number) => btcToSat(usdToBtc(usd));
-const satToUsd = (sat: number) => btcToUsd(satToBtc(sat));
-
 /**
  * HANDLE FIAT INPUT CHANGE
  */
@@ -55,15 +43,15 @@ const changeBtcInputValue = (value: number) => {
 
     if (selectedFiat === "GEL") {
         if (selectedBtc === "BTC") {
-            btcValue = gelToBtc(value);
+            btcValue = gelToBtc(value, data.gel.value);
         } else if (selectedBtc === "SAT") {
-            btcValue = gelToSat(value);
+            btcValue = gelToSat(value, data.gel.value);
         }
     } else if (selectedFiat === "USD") {
         if (selectedBtc === "BTC") {
-            btcValue = usdToBtc(value);
+            btcValue = usdToBtc(value, data.usd.value);
         } else if (selectedBtc === "SAT") {
-            btcValue = usdToSat(value);
+            btcValue = usdToSat(value, data.usd.value);
         }
     }
 
@@ -88,15 +76,15 @@ const changeFiatInputValue = (value: number) => {
 
     if (selectedFiat === "GEL") {
         if (selectedBtc === "BTC") {
-            fiatValue = btcToGel(value);
+            fiatValue = btcToGel(value, data.gel.value);
         } else if (selectedBtc === "SAT") {
-            fiatValue = satToGel(value);
+            fiatValue = satToGel(value, data.gel.value);
         }
     } else if (selectedFiat === "USD") {
         if (selectedBtc === "BTC") {
-            fiatValue = btcToUsd(value);
+            fiatValue = btcToUsd(value, data.usd.value);
         } else if (selectedBtc === "SAT") {
-            fiatValue = satToUsd(value);
+            fiatValue = satToUsd(value, data.usd.value);
         }
     }
 
