@@ -1,5 +1,5 @@
+import { convert } from "./strategy";
 import { Rates } from "./types";
-import { btcToGel, btcToUsd, gelToBtc, gelToSat, satToGel, satToUsd, usdToBtc, usdToSat } from "./utils";
 
 const d = document;
 const w = window;
@@ -36,25 +36,7 @@ w.onload = () => {
  * HANDLE FIAT INPUT CHANGE
  */
 const changeBtcInputValue = (value: number) => {
-    const selectedFiat = sessionStorage.getItem("sats.ge-selected-fiat");
-    const selectedBtc = sessionStorage.getItem("sats.ge-selected-btc");
-
-    let btcValue = 0;
-
-    if (selectedFiat === "GEL") {
-        if (selectedBtc === "BTC") {
-            btcValue = gelToBtc(value, data.gel.value);
-        } else if (selectedBtc === "SAT") {
-            btcValue = gelToSat(value, data.gel.value);
-        }
-    } else if (selectedFiat === "USD") {
-        if (selectedBtc === "BTC") {
-            btcValue = usdToBtc(value, data.usd.value);
-        } else if (selectedBtc === "SAT") {
-            btcValue = usdToSat(value, data.usd.value);
-        }
-    }
-
+    const { btcValue } = convert(value, 0, data);
     d!.querySelector<HTMLInputElement>("#btc-input")!.value = btcValue.toString();
 }
 
@@ -69,25 +51,7 @@ d!.querySelector<HTMLInputElement>("#fiat-input")!.addEventListener("input", e =
  */
 
 const changeFiatInputValue = (value: number) => {
-    const selectedFiat = sessionStorage.getItem("sats.ge-selected-fiat");
-    const selectedBtc = sessionStorage.getItem("sats.ge-selected-btc");
-
-    let fiatValue = 0;
-
-    if (selectedFiat === "GEL") {
-        if (selectedBtc === "BTC") {
-            fiatValue = btcToGel(value, data.gel.value);
-        } else if (selectedBtc === "SAT") {
-            fiatValue = satToGel(value, data.gel.value);
-        }
-    } else if (selectedFiat === "USD") {
-        if (selectedBtc === "BTC") {
-            fiatValue = btcToUsd(value, data.usd.value);
-        } else if (selectedBtc === "SAT") {
-            fiatValue = satToUsd(value, data.usd.value);
-        }
-    }
-
+    const { fiatValue } = convert(0, value, data);
     d!.querySelector<HTMLInputElement>("#fiat-input")!.value = fiatValue.toString();
 }
 
