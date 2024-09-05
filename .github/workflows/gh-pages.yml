@@ -23,7 +23,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # or use the Node.js version you need
+          node-version: '20'  # or use the Node.js version you need
 
       # Step 3: Install project dependencies
       - name: Install dependencies
@@ -39,3 +39,5 @@ jobs:
         with:
           publish_dir: ./dist
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          force_orphan: true  # Add this line to force creation of a new gh-pages branch without history
+
