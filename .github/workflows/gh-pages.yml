@@ -1,0 +1,41 @@
+# .github/workflows/gh-pages.yml
+name: Deploy React+Vite to GitHub Pages
+
+on:
+  # Trigger the workflow when pushing to the main or master branch
+  push:
+    branches:
+      - master
+
+  # Allow manual trigger via the GitHub Actions UI
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the latest code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # or use the Node.js version you need
+
+      # Step 3: Install project dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Build the Vite project (this will generate the 'dist' folder)
+      - name: Build the site
+        run: npm run build
+
+      # Step 5: Deploy the 'dist' folder to the gh-pages branch for GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          publish_dir: ./dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
